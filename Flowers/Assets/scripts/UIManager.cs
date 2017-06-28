@@ -2,12 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.IO;
 
-public class UIManager : MonoBehaviour {
-
+public class UIManager : MonoBehaviour{
+    public static int lvl = 0;
 	// Use this for initialization
 	void Start () {
-		
+        
+        if (lvl == 0)
+        {
+            FileInfo f = new FileInfo("progress.txt");
+            StreamWriter writer = f.CreateText();
+            for (int i = 0; i < 5; i++)
+            {
+                writer.WriteLine("0");
+            }
+          writer.Close();
+          Debug.Log(lvl);
+        }
+        lvl++;
 	}
 	
 	// Update is called once per frame
@@ -22,6 +38,7 @@ public class UIManager : MonoBehaviour {
     public void Play()
     {
         SceneManager.LoadScene(1);
+        
     }
 
     public void OneLevel()
@@ -47,6 +64,11 @@ public class UIManager : MonoBehaviour {
     public void FiveLevel()
     {
         SceneManager.LoadScene(6);
+    }
+
+    public void Help()
+    {
+        SceneManager.LoadScene(7);
     }
 
     public void Exit()
